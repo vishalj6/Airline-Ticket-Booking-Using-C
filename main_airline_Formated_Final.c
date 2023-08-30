@@ -27,7 +27,7 @@ void welcome_page()
 }
 int login_page()
 {
-    int i,j;
+    int i, j;
     int count, rem, count1, count3;
     unsigned long long int temp, temp1;
     char a[1];
@@ -55,7 +55,7 @@ start2:
         temp = c.mobile_no;
         while (temp > 0)
         {
-            // rem = temp % 10;
+            
             count++;
             temp = temp / 10;
         }
@@ -71,10 +71,10 @@ start2:
     fflush(stdin);
     scanf("%d", &n.total_tic);
     printf("\n");
-    start_1:
+start_1:
     for (i = 0; i < n.total_tic; i++)
     {
-        printf("Enter the person %d Index : ",i+1);
+        printf("Enter the person %d Index : ", i + 1);
         scanf("%d", &p[i].per_ind);
         fflush(stdin);
         printf("Enter Name of Person %d : ", i + 1);
@@ -95,7 +95,7 @@ start2:
     printf("\n");
 start:
     for (i = 0; i < n.total_tic; i++)
-    {
+    {\
         do
         {
             count1 = 0;
@@ -118,10 +118,13 @@ start:
     }
     for (i = 0; i < n.total_tic; i++)
     {
-        if (p[i].aadhar_no == p[i + 1].aadhar_no)
+        for (j = i + 1; j < n.total_tic; j++)
         {
-            printf("Two Aadhar card Can't be same\n");
-            goto start;
+            if (p[i].aadhar_no == p[j].aadhar_no)
+            {
+                printf("Two Aadhar card Can't be same\n");
+                goto start;
+            }
         }
     }
 start1:
@@ -158,13 +161,15 @@ start1:
     }
     for (i = 0; i < n.total_tic; i++)
     {
-        if (p[i].block[0] == p[i + 1].block[0] && p[i].passport_no == p[i + 1].passport_no)
+        for (j = i + 1; j < n.total_tic; j++)
         {
-            // if (p[i].block == p[i + 1].block)
-            // {
-            printf("Two Passport Number Can't be same\n");
-            goto start1;
-            // }
+            if (p[i].block[0] == p[j].block[0] && p[i].passport_no == p[j].passport_no)
+            {
+                
+                printf("Two Passport Number Can't be same\n");
+                goto start1;
+                
+            }
         }
     }
     printf("\n");
@@ -178,7 +183,6 @@ void print_info()
     {
         if (p[i].aadhar_no == 0)
         {
-            //   i++;
         }
         else
         {
@@ -187,8 +191,6 @@ void print_info()
             printf("Aadhar NO. of Person[%d]   :: %llu\n", i + 1, p[i].aadhar_no);
             printf("Passport NO. OF Person[%d] :: %s%llu\n", i + 1, p[i].block, p[i].passport_no);
         }
-
-        // f("\n");
     }
 }
 
@@ -216,8 +218,19 @@ void economy()
         printf("Enter the total seat of that class in airline : ");
         scanf("%d", &e[i].seat);
         printf("Enter the time scheduled       = ");
+    time:
         scanf("%d %d", &e[i].timehh, &e[i].timemm);
         fflush(stdin);
+        if (e[i].timehh >= 24 || e[i].timehh < 0)
+        {
+            printf("Enter the correct time format of hour\n");
+            goto time;
+        }
+        if (e[i].timemm >= 60 || e[i].timemm < 0)
+        {
+            printf("Enter the correct time format of Minute\n");
+            goto time;
+        }
     }
 }
 
@@ -243,7 +256,19 @@ void executive()
         printf("Enter the total seat of that class in airline : ");
         scanf("%d", &e1[i].seat);
         printf("Enter the time scheduled       = ");
+    time1:
         scanf("%d %d", &e1[i].timehh, &e1[i].timemm);
+        fflush(stdin);
+        if (e1[i].timehh >= 24 || e1[i].timehh < 0)
+        {
+            printf("Enter the correct time format of hour\n");
+            goto time1;
+        }
+        if (e1[i].timemm >= 60 || e1[i].timemm < 0)
+        {
+            printf("Enter the correct time format of Minute\n");
+            goto time1;
+        }
     }
 }
 
@@ -270,7 +295,19 @@ void bussiness()
         printf("Enter the total seat of that class in airline : ");
         scanf("%d", &b[i].seat);
         printf("Enter the time scheduled = ");
+    time2:
         scanf("%d %d", &b[i].timehh, &b[i].timemm);
+        fflush(stdin);
+        if (b[i].timehh >= 24 || b[i].timehh < 0)
+        {
+            printf("Enter the correct time format of hour\n");
+            goto time2;
+        }
+        if (b[i].timemm >= 60 || b[i].timemm < 0)
+        {
+            printf("Enter the correct time format of Minute\n");
+            goto time2;
+        }
     }
 }
 
@@ -286,21 +323,17 @@ void airline_print_det()
     for (i = 0; i < (n.n1); i++)
     {
         printf("Economy     %d           %s    %s  %d:%d   %s              %d    %d\n", e[i].flight_no, e[i].from, e[i].to, e[i].timehh, e[i].timemm, e[i].airline_name, e[i].price, e[i].seat);
-        // printf("FLIGHT NUM\tSTARTING DES.\tENDING DES.\tTIME\t\tAIRLINE NAME\t\tPRICE\tTOTAL SEAT\n\n");
-        // printf("%d\t\t%s\t\t%s\t\t%d:%d\t\t%s\t%d\t%d\n", e[i].flight_no, e[i].from, e[i].to, e[i].timehh, e[i].timemm, e[i].airline_name, e[i].price, e[i].seat);
         count++;
     }
 
     for (i = 0; i < (n.n2); i++)
     {
-        // printf("FLIGHT NUM\tSTARTING DES.\tENDING DES.\tTIME\t\tAIRLINE NAME\t\tPRICE\tTOTAL SEAT\n\n");
         printf("Executive   %d           %s    %s  %d:%d   %s              %d    %d\n", e1[i].flight_no, e1[i].from, e1[i].to, e1[i].timehh, e1[i].timemm, e1[i].airline_name, e1[i].price, e1[i].seat);
         count++;
     }
 
     for (i = 0; i < (n.n3); i++)
     {
-        // printf("FLIGHT NUM\tSTARTING DES.\tENDING DES.\tTIME\t\tAIRLINE NAME\t\tPRICE\tTOTAL SEAT\n\n");
         printf("Business    %d           %s    %s  %d:%d   %s              %d    %d\n", b[i].flight_no, b[i].from, b[i].to, b[i].timehh, b[i].timemm, b[i].airline_name, b[i].price, b[i].seat);
         count++;
     }
@@ -309,7 +342,7 @@ void airline_print_det()
 void flight_sort()
 {
     char flight_name[30], yn;
-    int copy1, copy2, copy3, count = 0, ctr = 0;
+    int copy1, copy2, copy3, flag1 = 0, flag2 = 0, flag3 = 0, ctr = 0;
 jump:
     fflush(stdin);
     printf("\nEnter the name of your choice flight : ");
@@ -323,57 +356,48 @@ jump:
         copy1 = strcmp(flight_name, e[i].airline_name);
         copy2 = strcmp(flight_name, e1[i].airline_name);
         copy3 = strcmp(flight_name, b[i].airline_name);
-        // ctr++;
         if (copy1 == 0)
         {
-            // copy1 = i;
             printf("Economy     %d           %s    %s   %d:%d   %s              %d    %d\n", e[i].flight_no, e[i].from, e[i].to, e[i].timehh, e[i].timemm, e[i].airline_name, e[i].price, e[i].seat);
-            // printf("Economy:\n%d           %s    %s  %d:%d   %s         %d    %d\n", e[i].flight_no, e[copy1].from, e[copy1].to, e[copy1].timehh, e[copy1].timemm, e[copy1].price, e[copy1].seat);
-            count++;
+            
+            flag1 = 1;
         }
         if (copy2 == 0)
         {
-            // copy2 = i;
+           
             printf("Executive   %d           %s    %s   %d:%d   %s              %d    %d\n", e1[i].flight_no, e1[i].from, e1[i].to, e1[i].timehh, e1[i].timemm, e1[i].airline_name, e1[i].price, e1[i].seat);
-            count++;
+            flag2 = 1;
         }
-        // ctr++;
+        
         if (copy3 == 0)
         {
-            // copy3 = i;
+            
             printf("Business    %d           %s    %s   %d:%d   %s              %d    %d\n", b[i].flight_no, b[i].from, b[i].to, b[i].timehh, b[i].timemm, b[i].airline_name, b[i].price, b[i].seat);
-            count++;
+            flag3 = 1;
         }
+    }
+    if (flag1 == 1 || flag2 == 1 || flag3 == 1)
+    {
+    }
+    else
+    {
+        printf("We don't have your choice flight please choose another airline");
+        goto jump;
     }
 }
 
 void flight_starend_sort()
 {
-    int i, copy, copy1, count = 0;
+    int i, copy, copy1, count = 0,flag1=0,flag2=0,flag3=0;
     char start[30], end[30], yn;
 jump:
     fflush(stdin);
     printf("Enter the starting and ending destination :\n");
     gets(start);
     strlwr(start);
-    // for (i = 0; i < '\0'; i++)
-    // {
-    //     if (start[i] >= 'A' && start[i] <= 'Z')
-    //     {
-    //         start[i] = start[i] + 32;
-    //     }
-    // }
-    // puts(start);
+
     gets(end);
     strlwr(end);
-    // for (i = 0; i < '\0'; i++)
-    // {
-    //     if (end[i] >= 'A' && end[i] <= 'Z')
-    //     {
-    //     end[i] =end[i] + 32;
-    //     }
-    // }
-    // puts(end);
 
     printf("------------------------------------------------------------------------------------\n");
     printf("  CLASS    | FLIGHT NO | FROM | TO  | TIME | AIRLINE NAME | PRICE | SEATS |\n");
@@ -386,7 +410,7 @@ jump:
         {
             copy1 = i;
             printf("Economy:   %d           %s    %s   %d:%d   %s         %d    %d\n", e[i].flight_no, e[copy1].from, e[copy1].to, e[copy1].timehh, e[copy1].timemm, e[i].airline_name, e[copy1].price, e[copy1].seat);
-            count++;
+            flag1=1;
         }
 
         copy = strcmp(start, e1[i].from);
@@ -395,19 +419,24 @@ jump:
         {
             copy1 = i;
             printf("Executive: %d           %s    %s   %d:%d   %s         %d    %d\n", e1[i].flight_no, e1[copy1].from, e1[copy1].to, e1[copy1].timehh, e1[copy1].timemm, e1[i].airline_name, e1[copy1].price, e1[copy1].seat);
-            count++;
+            flag2=1;
         }
-        // }
-        // for (int i = 0; i < (n.n1 + n.n2 + n.n3); i++)
-        // {
         copy = strcmp(start, b[i].from);
         copy1 = strcmp(end, b[i].to);
         if (copy == 0 && copy1 == 0)
         {
             copy1 = i;
             printf("Business:  %d           %s    %s   %d:%d   %s         %d    %d\n", b[i].flight_no, b[copy1].from, b[copy1].to, b[copy1].timehh, b[copy1].timemm, b[i].airline_name, b[copy1].price, b[copy1].seat);
-            count++;
+            flag3=1;
         }
+    }
+     if (flag1 == 1 || flag2 == 1 || flag3 == 1)
+    {
+    }
+    else
+    {
+        printf("We don't have your choice flight please choose another airline");
+        goto jump;
     }
 }
 void reservation(int a, int d)
@@ -471,9 +500,6 @@ void reservation(int a, int d)
     airline_print_det();
 jump:
     printf("\n");
-    // fflush(stdin);
-    // printf("Your Personal details are as follows\n");
-    // print_info();
     printf("\nY.)Enter Yes to conform Your Reservation\n");
     printf("N.)Enter No to Enter Details again\n");
     printf("Enter->>");
@@ -640,15 +666,32 @@ void paymentmethod()
                 printf("Enter the 12 digit Account number\n");
             }
         } while (count3 != 12);
+    start:
         printf("Card expiry\n");
-        printf("------------------------\n");
-        printf("Month | Year\n");
-        printf("------------------------\n");
+        printf("Enter Month in words:");
         fflush(stdin);
         gets(ex_month);
+        strupr(ex_month);
+        for (i = 0; i < ex_month[i] != '\0'; i++)
+        {
+            if (ex_month[i] >= 'A' && ex_month[i] <= 'Z')
+            {
+            }
+            else
+            {
+                printf("Enter the correct Month name\n");
+                goto start;
+            }
+        }
+    year:
         printf("Enter Year\n");
         fflush(stdin);
         scanf("%d", &ex_year);
+        if (ex_year <= 2022)
+        {
+            printf("Enter Valid year:\n");
+            goto year;
+        }
         printf("\n");
         printf("Enter Last 3 CVV Digits :\n");
 
@@ -660,26 +703,17 @@ void paymentmethod()
             printf("%c", ch);
         }
         printf("\n");
-        // printf("\nEnter the password <any 8 characters>: \n");
         printf("The Expiry Date is %s-%d", ex_month, ex_year);
         break;
 
     case 2:
-    start:
+    start2:
         printf("\nEnter UPI Details:\n Ex:xyz@okbankname\n");
         fflush(stdin);
         gets(upi_id);
-        // for (i = 0; i < 3; i++)
-        // {
-        //     ch = getch();
-        //     upi_id[i] = ch;
-        //     j++;
-        //     printf("%c", ch);
-        // }
-        // puts(upi_id);
         for (i = 0; upi_id[i] != '\0'; i++)
         {
-            if (upi_id[i] == '@' && (upi_id[i-1]>='a' && upi_id[i-1]<='z') && (upi_id[i-1]>='A' && upi_id[i-1]<='Z') && (upi_id[i-1]>='1' && upi_id[i-1]<='9') && (upi_id[i+1]>='a' && upi_id[i+1]<='z'))
+            if (upi_id[i] == '@' && (upi_id[i - 1] >= 'a' && upi_id[i - 1] <= 'z') || (upi_id[i - 1] >= 'A' && upi_id[i - 1] <= 'Z') || (upi_id[i - 1] >= '0' && upi_id[i - 1] <= '9') && (upi_id[i + 1] >= 'a' && upi_id[i + 1] <= 'z'))
             {
                 flag = 1;
             }
@@ -687,7 +721,7 @@ void paymentmethod()
         if (flag == 0)
         {
             printf("Enter the valid upi_id\n");
-            goto start;
+            goto start2;
         }
         else
             printf("\nYour UPI id is %s\n", upi_id);
@@ -756,63 +790,63 @@ void delete ()
                 }
             }
         }
-        // if(count==del_tic)
-        // {
-        //     n.total_tic=n.total_tic-del_tic;
-        // }
     }
 }
 
 void print_ticket(int a)
 {
-    int j,i,flight_no;
-    printf("/n------------------------------------------------------------------------------------\n");
+    int j, i, flight_no;
+    printf("\n");
+    printf("------------------------------------------------------------------------------------\n");
     printf("\t\t\t\tYOUR TICKET DETAILS ARE AS FOLLOWS\n");
     printf("------------------------------------------------------------------------------------\n");
+ticket:
     printf("Please Enter your Flight number\n");
-    // scanf("%d",&flight_no);
-    for (i = 0; i < n.total_tic; i++)
+    scanf("%d", &flight_no);
+    
+    if (flight_no == n.user_flight)
     {
-        
-        // l = strcmp(n.class[30],"ECONOMY");
-        if (n.flag == 1)
+        for (i = 0; i < n.total_tic; i++)
         {
-            // printf("nsknxksnk");
-            printf("\n\nNAME  : %s\n", p[i].name);
-            printf("\nFLIGHT NO : %d", e[n.user_flight-1].flight_no);
-            printf("\nMODE    : ECONOMY");
-            printf("\nFROM    : %s", e[n.user_flight-1].from);
-            printf("\nTO      : %s", e[n.user_flight-1].to); 
+            if (p[i].aadhar_no == 0)
+            {
+            }
+            else
+            {
+                printf("\nName of person : %s\n", p[i].name);
+            }
+            printf("------------------------------------------------------------------------------------\n");
+            printf("  CLASS    | FLIGHT NO | FROM | TO  | TIME | AIRLINE NAME |\n");
+            printf("------------------------------------------------------------------------------------\n");
+            for (int j = 0; j < (n.n1 + n.n2 + n.n3); j++)
+            {
+                if (n.user_flight == e[j].flight_no)
+                {
+                    printf("Economy     %d           %s    %s   %d:%d   %s              \n", e[j].flight_no, e[j].from, e[j].to, e[j].timehh, e[j].timemm, e[j].airline_name);
+                }
+                if (n.user_flight == e1[j].flight_no)
+                {
+                    printf("Executive   %d           %s    %s   %d:%d   %s              \n", e1[j].flight_no, e1[j].from, e1[j].to, e1[j].timehh, e1[j].timemm, e1[j].airline_name);
+                }
+                if (n.user_flight == b[j].flight_no)
+                {
 
-            // printf("\tCLASS:%s\n", n.class);
+                    printf("Business    %d           %s    %s   %d:%d   %s              \n", b[j].flight_no, b[j].from, b[j].to, b[j].timehh, b[j].timemm, b[j].airline_name);
+                }
+            }
         }
-        // m = strcmp(n.class[30],"EXECUTIVE");
-        if (n.flag1 == 1)
-        {
-            printf("\n\nNAME  : %s", p[i].name);
-            printf("\nFLIGHT NO : %d", e1[n.user_flight].flight_no);
-            printf("\nMODE    : EXECUTIVE");
-            printf("\nFROM    : %s", e1[n.user_flight].from);
-            printf("\nTO      : %s\n", e1[n.user_flight].to);
-            // printf("\tCLASS:%s\n", n.class);
-        }
-        if (n.flag2 == 1)
-        {
-            printf("\n\nNAME   : %s", p[i].name);
-            printf("\nFLIGHT NO : %d", b[n.user_flight].flight_no);
-            printf("\nMODE     : BUSINESS");
-            printf("\nFROM     : %s", b[n.user_flight].from);
-            printf("\nTO       : %s\n", b[n.user_flight].to);
-            // printf("\tCLASS:%s\n", n.class);
-        }
-        
+    }
+    else
+    {
+        printf("Please enter your correct flight number That is against your login details\n");
+        goto ticket;
     }
 }
 int main()
 {
     welcome_page();
     n.del_tic = 0;
-    n.flag=0,n.flag1=0,n.flag2=0;
+    n.flag = 0, n.flag1 = 0, n.flag2 = 0;
     int num1, num2, num3, class, user_num, main_num, flag = 0;
     while (1)
     {
@@ -849,7 +883,6 @@ int main()
                 }
             }
             break;
-            
         case 2:
             printf("\nEnter number for backend purpose :\n");
             printf("1.) for scanning details\n");
@@ -884,7 +917,7 @@ int main()
                         goto start;
                         break;
                     default:
-                        ("Our Airlines are an startup ones iske baar ki aukaad k baar hain\n");
+                        ("Our Airlines system provides only 3 types of class\n");
                     }
                 }
                 break;
@@ -892,8 +925,8 @@ int main()
                 airline_print_det();
                 break;
             }
-                break;
 
+            break;
         case 3:
             while (1)
             {
@@ -914,7 +947,6 @@ int main()
                     printf("\nEnter your choice for booking the AIR TICKETS\n");
                     printf("1.) for choosing through Airlines Name\n");
                     printf("2.) for choosing through Starting and Ending Destination\n");
-                    // printf("Enter 3 for choosing through Time \n");
                     printf("Enter->> ");
                     scanf("%d", &user_num);
                     switch (user_num)
@@ -930,8 +962,6 @@ int main()
                     printf("\nEnter your reservation details\n");
                     printf("Please enter the flight number that you wants to book :\n");
                     scanf("%d", &n.user_flight);
-                    // printf("\nEnter the number of tickets you wants to purchase\n");
-                    // scanf("%d", &n.total_tic);
                     reservation(n.user_flight, n.total_tic);
                     break;
 
@@ -962,13 +992,13 @@ int main()
                     printf("\t\t\t\t\t\t           Thanks For Booking                \n");
                     printf("****************************************************************************************************************************************************\n");
                     getch();
-                    exit(0);
+                    return 0;
                     break;
                 }
             }
             break;
         case 4:
-            exit(0);
+            return 0;
         }
     }
     return 0;
